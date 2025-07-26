@@ -4,6 +4,9 @@ import { Carousel, Image } from 'react-bootstrap';
 import Message from './Message';
 import { useGetTopProductsQuery } from '../slices/productsApiSlice';
 
+/*Overriding bootstrap styles*/
+import '../assets/styles/product.css';
+
 const ProductCarousel = () => {
   const { data: products, isLoading, error } = useGetTopProductsQuery();
 
@@ -18,7 +21,7 @@ const ProductCarousel = () => {
   }
 
   return (
-    <Carousel pause='hover' className='bg-white mb-4 border-bottom border-4'>
+    <Carousel pause='hover' className='bg-primary'>
       {products.map((product) => (
         <Carousel.Item key={product._id}>
           <Link to={`/product/${product._id}`}>

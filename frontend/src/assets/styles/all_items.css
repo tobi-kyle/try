@@ -1,0 +1,138 @@
+@font-face {
+  font-family: 'safety-medium';
+  src: url('../fonts/safety.medium.otf') format('opentype');
+}
+
+/* Download link: https://www.1001fonts.com/safety-font.html */
+
+* {
+  font-family: 'safety-medium','Gill Sans', sans-serif;
+}
+
+main {
+  min-height: 100dvh;
+  background: #212234;
+  color: #fafafa;
+}
+
+/*Figure out where this is from*/
+header {
+  border-color: #07f3fe !important;
+}
+
+.text-cyan {
+  color: #07f3fe !important;
+}
+
+.text-cyan:hover {
+  color: #0b97f6 !important;
+}
+
+.rating span {
+  margin: 0.1rem;
+}
+
+.rating svg {
+  color: #07f3fe;
+}
+
+.rating-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+}
+
+.product-title-text {
+  margin-bottom: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+table td,
+table th {
+  text-align: center;
+}
+
+.review {
+  margin-top: 30px;
+}
+
+.review h2 {
+  font-size: 24px;
+  background: #f4f4f4;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.review button {
+  margin-top: 10px;
+}
+
+.carousel-caption {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  filter: invert(1);
+}
+
+.active .page-link {
+  background: #07f3fe !important;
+  color: #fff !important;
+  outline: none;
+  border: none;
+}
+.page-link {
+  color: #000 !important;
+  outline: none;
+  border: none;
+}
+
+/* Style modifications/additions */
+
+h1{}
+
+/* New classes */
+
+.flexbox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.5rem;
+}
+
+.addPadding{
+  padding: 1rem;
+}
+
+.addVertPadding{
+  padding: 1rem 0;
+}
+
+.btn-format{
+  background: #07f3fe;
+  color: #fafafa;
+}
+
+/* Bootstrap color overrides */
+
+/*Match Background Color*/
+.bg-primary {
+  background-color: #212234 !important;
+}
+
+/*Slightly lighter Background Color*/
+.bg-secondary {
+  background-color: #3b3b4d !important;
+}
+
+/* Custom color for buttons */
+.btn-gray {
+  background: #0b97f6 !important;
+  color: #fafafa !important;
+}

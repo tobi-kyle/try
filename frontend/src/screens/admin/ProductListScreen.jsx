@@ -64,7 +64,7 @@ const ProductListScreen = () => {
             className='btn-sm m-3'
             onClick={createProductHandler}
             style={{
-              backgroundColor: '#D3592A',
+              /*backgroundColor: '#D3592A',*/
               border: 'none',
             }}
           >
@@ -86,7 +86,7 @@ const ProductListScreen = () => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          <Table striped bordered hover responsive className='table-sm'>
+          <Table striped bordered hover responsive className='table-sm bg-white'>
             <thead>
               <tr>
                 <th>ID</th>
@@ -102,7 +102,7 @@ const ProductListScreen = () => {
                 <tr key={product._id}>
                   <td>{product._id}</td>
                   <td>{product.name}</td>
-                  <td>$ {product.price}</td>
+                  <td>${product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>
                   <td>
@@ -113,7 +113,7 @@ const ProductListScreen = () => {
                     </LinkContainer>
                     <Button
                       variant='danger'
-                      className='btn-sm'
+                      className='btn-sm btn-blue'
                       onClick={() => deleteHandler(product._id)}
                     >
                       <FaTrash />

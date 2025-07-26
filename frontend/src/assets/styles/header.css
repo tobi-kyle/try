@@ -1,0 +1,30 @@
+/* All overrides for Bootstrap styles regarding Header*/
+
+.navbar{
+    background: #212234;
+}
+
+.navbar-brand {
+    all: unset;
+
+    padding: 0;
+}
+
+.navbar-brand:hover {
+    cursor: pointer;
+}
+
+#username, #adminmenu{
+    color: #43f4fd;
+}
+
+/*Badge/Notification if item is in cart*/
+.badge {
+    color: #43f4fd;
+    
+    border-radius: 12px;
+}
+
+.bg-primary{
+    background-color: #098de6 !important;
+}

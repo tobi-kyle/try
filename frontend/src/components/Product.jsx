@@ -3,13 +3,16 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
 
+import '../assets/styles/all_items.css';
+
 const Product = ({ product }) => {
   return (
-    <Card className='p-2 rounded shadow shadow-4'>
+    <Card className='bg-primary p-2 rounded shadow shadow-4 card-hover'>
       <Link to={`/product/${product._id}`}>
         <Card.Img
           src={product.image}
           variant='top'
+          className="rounded"
           style={{
             width: '100%',
             height: '200px',
@@ -22,7 +25,7 @@ const Product = ({ product }) => {
           to={`/product/${product._id}`}
           style={{
             textDecoration: 'none',
-            color: '#000',
+            color: '#ffffff',
           }}
         >
           <Card.Title as='div'>
