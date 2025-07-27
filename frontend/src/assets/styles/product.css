@@ -1,0 +1,19 @@
+/*Bootrstrap override bg for ProductCarousel, Product*/
+
+.bg-primary{
+    background-color: #212234 !important;
+}
+
+/* Product Card Exclusive */
+
+.p-2{
+    background: #212234;
+}
+
+/* New Classes for Product Card*/
+
+.card-hover:hover {
+  transform: scale(1.04);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}

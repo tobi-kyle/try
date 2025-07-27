@@ -1,0 +1,25 @@
+.product-screen-layout {
+  display: grid;
+
+grid-template-areas:
+  'image' 'details',
+  'reviews' 'addToCart';
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+
+  gap: 2vw;
+  padding: 2vw;
+}
+
+@media (max-width: 768px) {
+  .product-screen-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .product-screen-layout {
+    grid-template-columns: 1fr;
+  }
+}
