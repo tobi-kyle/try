@@ -22,8 +22,6 @@ import {
 import { addToCart } from '../slices/cartSlice';
 import Meta from '../components/Meta';
 
-import '../assets/styles/product_screen.css';
-
 const ProductScreen = () => {
   const { id: productId } = useParams();
 
@@ -92,7 +90,7 @@ const ProductScreen = () => {
           {error?.data?.message || error.error}
         </Message>
       ) : (
-        <div /*className='product-screen-layout'*/>
+        <>
           <Meta title={product.name} description={product.description} />
           <Row>
             <Col md={5}>
@@ -179,10 +177,14 @@ const ProductScreen = () => {
 
                   <ListGroup.Item>
                     <Button
-                      className='btn-block btn-cyan'
+                      className='btn-block'
                       type='button'
                       disabled={product.countInStock === 0}
                       onClick={addToCartHandler}
+                      style={{
+                        backgroundColor: '#D3592A',
+                        border: 'none',
+                      }}
                     >
                       Add To Cart
                     </Button>
@@ -191,25 +193,22 @@ const ProductScreen = () => {
               </Card>
             </Col>
           </Row>
-          <Row className='review addVertPadding'>
+          <Row className='review'>
             <Col md={6}>
-              <h2 className='bg-primary rounded'>Reviews</h2>
+              <h2>Reviews</h2>
               {product.reviews.length === 0 && (
                 <Message variant='info'>No Reviews</Message>
               )}
-              <ListGroup variant='flush addVertPadding'>
+              <ListGroup variant='flush'>
                 {product.reviews.map((review) => (
-                  <ListGroup.Item key={review._id} className='rounded'>
+                  <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
                   </ListGroup.Item>
                 ))}
-                {/* Brute-force space for form */}
-                <p></p>
-                <p></p>
-                <ListGroup.Item variant='flush' className='rounded'>
+                <ListGroup.Item>
                   <h4>Write a Customer Review</h4>
                   {loadingProductReview && <Loader />}
 
@@ -241,8 +240,11 @@ const ProductScreen = () => {
                       </Form.Group>
                       <Button
                         type='submit'
-                        className='btn-cyan'
                         disabled={loadingProductReview}
+                        style={{
+                          backgroundColor: '#657A8C',
+                          border: 'none',
+                        }}
                       >
                         Submit
                       </Button>
@@ -256,7 +258,7 @@ const ProductScreen = () => {
               </ListGroup>
             </Col>
           </Row>
-        </div>
+        </>
       )}
     </>
   );
