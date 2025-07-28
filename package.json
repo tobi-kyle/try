@@ -5,14 +5,14 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-  "start": "set NODE_NO_WARNINGS=1 && node backend/server.js",
-  "server": "cd backend && set NODE_NO_WARNINGS=1 && nodemon server.js",
-  "client": "set NODE_NO_WARNINGS=1 && npm start --prefix frontend",
-  "dev": "concurrently \"npm run server\" \"npm run client\"",
-  "data:import": "set NODE_NO_WARNINGS=1 && node backend/seeder.js",
-  "data:destroy": "set NODE_NO_WARNINGS=1 && node backend/seeder.js -d",
-  "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
-},
+    "start": "set NODE_NO_WARNINGS=1 && node backend/server.js",
+    "server": "cd backend && set NODE_NO_WARNINGS=1 && nodemon server.js",
+    "client": "set NODE_NO_WARNINGS=1 && npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "set NODE_NO_WARNINGS=1 && node backend/seeder.js",
+    "data:destroy": "set NODE_NO_WARNINGS=1 && node backend/seeder.js -d",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+  },
   "author": "GROUPPROJECT",
   "license": "MIT",
   "dependencies": {
@@ -25,7 +25,7 @@
     "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
-    "concurrently": "^8.0.1",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.0.3",
     "nodemon": "^2.0.22"
   }
