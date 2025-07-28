@@ -101,7 +101,11 @@ const ProfileScreen = () => {
 
           <Button
             type='submit'
-            className='my-3 btn-cyan'
+            className='my-3'
+            style={{
+              backgroundColor: '#D3592A',
+              border: 'none',
+            }}
           >
             Update
           </Button>
@@ -117,7 +121,7 @@ const ProfileScreen = () => {
             {error?.data?.message || error.error}
           </Message>
         ) : (
-          <Table striped bordered hover responsive className='table-sm bg-white'>
+          <Table striped bordered hover responsive className='table-sm'>
             <thead>
               <tr>
                 <th>ID</th>
@@ -150,7 +154,7 @@ const ProfileScreen = () => {
                   </td>
                   <td>
                     <LinkContainer to={`/order/${order._id}`}>
-                      <Button variant='light' className='btn-sm btn-dark'>
+                      <Button variant='light' className='btn-sm'>
                         Details
                       </Button>
                     </LinkContainer>

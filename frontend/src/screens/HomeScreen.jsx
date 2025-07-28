@@ -10,8 +10,6 @@ import Paginate from '../components/Paginate';
 import ProductCarousel from '../components/ProductCarousel';
 import Meta from '../components/Meta';
 
-import '../assets/styles/all_items.css';
-
 const HomeScreen = () => {
   const { pageNumber, keyword } = useParams();
   const { data, isLoading, error } = useGetProductsQuery({
@@ -20,22 +18,17 @@ const HomeScreen = () => {
   });
 
   return (
-    <div className='flexbox'>
+    <div>
       {!keyword ? (
         <>
-          <h1 className='text-cyan addPadding'>Top Rated Products</h1>
+          <h1 className='display-8'>Top Rated Products</h1>
           <ProductCarousel />
-
-          <h1 className='display-8 text-cyan addPadding'>Latest Products</h1>
         </>
       ) : (
-        <>
-          <Link className='btn btn-dark my-3' to='/'>
-            <FaAngleLeft />
-              Go Back
-          </Link>
-          <h1 className='display-8 text-cyan addPadding'>Results for: "{keyword}"</h1>
-        </>
+        <Link className='btn btn-dark my-3' to='/'>
+          <FaAngleLeft />
+          Go Back
+        </Link>
       )}
       {isLoading ? (
         <Loader />
@@ -45,20 +38,21 @@ const HomeScreen = () => {
         </Message>
       ) : (
         <>
-          <Meta/>
+          <Meta title={'Welcome to Hertz'} />
+          <h1 className='display-8'>Latest Products</h1>
           <Row>
             {[...data.products]
               .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-              .map((product, index, arr) => (
+              .map((product) => (
                 <Col
                   key={product._id}
                   sm={12}
-                  md={arr.length === 1 ? 12 : 6}
-                  lg={arr.length === 1 ? 12 : 4}
-                  xl={arr.length === 1 ? 12 : 3}
-                  className='p-2'
+                  md={6}
+                  lg={4}
+                  xl={3}
+                  className='p-2 bg-white rounded'
                 >
-                  <Product product={product} />
+                  <Product product={product}></Product>
                 </Col>
               ))}
           </Row>
