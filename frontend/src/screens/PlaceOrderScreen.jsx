@@ -27,22 +27,37 @@ const PlaceOrderScreen = () => {
 
   const dispatch = useDispatch();
   const placeOrderHandler = async () => {
-    try {
-      const res = await createOrder({
-        orderItems: cart.cartItems,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
-        itemsPrice: cart.itemsPrice,
-        shippingPrice: cart.shippingPrice,
-        taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
-      }).unwrap();
-      dispatch(clearCartItems());
-      navigate(`/order/${res._id}`);
-    } catch (error) {
-      toast.error(error);
+  try {
+    const res = await createOrder({
+      orderItems: cart.cartItems,
+      shippingAddress: cart.shippingAddress,
+      paymentMethod: cart.paymentMethod,
+      itemsPrice: cart.itemsPrice,
+      shippingPrice: cart.shippingPrice,
+      taxPrice: cart.taxPrice,
+      totalPrice: cart.totalPrice,
+    }).unwrap();
+
+    console.log('✅ Order Response:', res);
+    dispatch(clearCartItems());
+    navigate(`/order/${res._id}`);
+  } catch (err) {
+    console.error('❌ Order creation failed:', err);
+
+    // ✅ Add this for clarity:
+    if (err?.data?.message) {
+      console.error('🔍 Server Message:', err.data.message);
+    } else if (err?.message) {
+      console.error('🔍 Error Message:', err.message);
+    } else {
+      console.error('🔍 Full Error Object:', JSON.stringify(err, null, 2));
     }
-  };
+
+    toast.error(err?.data?.message || err.message || 'Order failed');
+  }
+};
+
+
 
   return (
     <>

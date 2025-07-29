@@ -14,6 +14,9 @@ const protect = asyncHandler(async (req, res, next) => {
     token = req.cookies.jwt;
   }
 
+  console.log('🔐 Incoming request to protected route');
+  console.log('📦 Token:', token || 'No token provided');
+
   if (!token) {
     res.status(401);
     throw new Error('Not authorized, no token');
@@ -21,12 +24,13 @@ const protect = asyncHandler(async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = await User.findById(decoded.id).select('-password');
+    req.user = await User.findById(decoded.userId).select('-password');
 
+    console.log('✅ Authenticated user:', req.user ? req.user._id : 'User not found');
 
     next();
   } catch (error) {
-    console.error(error);
+    console.log('❌ Token error:', error.message);
     res.status(401);
     throw new Error('Not authorized, token failed');
   }
