@@ -37,16 +37,17 @@ const RegisterScreen = () => {
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
       return;
-    } else {
-      try {
-        const res = await register({ name, email, password }).unwrap();
-        dispatch(setCredentials({ ...res }));
-        navigate(redirect);
-      } catch (error) {
-        toast.error(error?.data?.message || error.error);
-      }
+    }
+
+    try {
+      const res = await register({ name, email, password }).unwrap();
+      toast.success('Registered successfully!');
+      navigate('/login');
+    } catch (error) {
+      toast.error(error?.data?.message || error.error);
     }
   };
+
   return (
     <FormContainer>
       <Meta title={'TechShop'} />
@@ -91,6 +92,7 @@ const RegisterScreen = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
+
         <Button
           type='submit'
           variant='primary'
@@ -101,6 +103,7 @@ const RegisterScreen = () => {
         </Button>
         {isLoading && <Loader />}
       </Form>
+
       <Row className='py-3'>
         <Col>
           Already registered?{' '}
