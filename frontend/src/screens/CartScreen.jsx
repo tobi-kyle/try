@@ -24,11 +24,17 @@ const CartScreen = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const addToCartHandler = async (product, qty) => {
-    dispatch(addToCart({ ...product, qty }, { meta: { userId: userInfo?._id } }));
+    dispatch(addToCart({ 
+      item: { ...product, qty }, 
+      userId: userInfo?._id 
+    }));
   };
 
   const removeFromCartHandler = async (id) => {
-    dispatch(removeFromCart(id, { meta: { userId: userInfo?._id } }));
+    dispatch(removeFromCart({ 
+      productId: id, 
+      userId: userInfo?._id 
+    }));
   };
 
   const checkoutHandler = () => {

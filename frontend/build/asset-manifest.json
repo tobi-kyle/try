@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b264e4d5.css",
+    "main.js": "/static/js/main.be2d8d21.js",
+    "static/media/zeusLogo.png": "/static/media/zeusLogo.5b04d42b02a2e4bdf7fd.png",
+    "static/media/safety.medium.otf": "/static/media/safety.medium.79324df7b64d816737b9.otf",
+    "index.html": "/index.html",
+    "main.b264e4d5.css.map": "/static/css/main.b264e4d5.css.map",
+    "main.be2d8d21.js.map": "/static/js/main.be2d8d21.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b264e4d5.css",
+    "static/js/main.be2d8d21.js"
+  ]
+}

@@ -137,15 +137,33 @@ h1{}
   color: #fafafa !important;
 }
 
-/* Fix carousel controls to be white */
-.carousel-control-prev,
-.carousel-control-next {
+/* Fix carousel controls to be white - override Bootstrap defaults */
+.carousel.bg-primary .carousel-control-prev,
+.carousel.bg-primary .carousel-control-next,
+.carousel .carousel-control-prev,
+.carousel .carousel-control-next {
   color: white !important;
+  opacity: 0.8 !important;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  filter: invert(1) !important;
+.carousel.bg-primary .carousel-control-prev:hover,
+.carousel.bg-primary .carousel-control-next:hover,
+.carousel .carousel-control-prev:hover,
+.carousel .carousel-control-next:hover {
+  color: white !important;
+  opacity: 1 !important;
+}
+
+.carousel.bg-primary .carousel-control-prev-icon,
+.carousel.bg-primary .carousel-control-next-icon,
+.carousel .carousel-control-prev-icon,
+.carousel .carousel-control-next-icon {
+  filter: invert(0) !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 50% !important;
+  padding: 10px !important;
+  width: 3rem !important;
+  height: 3rem !important;
 }
 
 /* Fix table striped text color to be white */

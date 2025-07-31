@@ -12,14 +12,29 @@ const getInitialCartState = (userId) => {
     : { cartItems: [], shippingAddress: {}, paymentMethod: 'PayPal' };
 };
 
-const initialState = { cartItems: [], shippingAddress: {}, paymentMethod: 'PayPal' };
+// Get initial user info to determine if we should load user cart
+const getUserInfo = () => {
+  try {
+    return localStorage.getItem('userInfo') 
+      ? JSON.parse(localStorage.getItem('userInfo'))
+      : null;
+  } catch (error) {
+    return null;
+  }
+};
+
+// Initialize cart with user-specific data if user is logged in
+const userInfo = getUserInfo();
+const initialState = userInfo 
+  ? getInitialCartState(userInfo._id)
+  : { cartItems: [], shippingAddress: {}, paymentMethod: 'PayPal' };
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const item = action.payload;
+      const { item, userId } = action.payload;
 
       const existItem = state.cartItems.find((x) => x._id === item._id);
 
@@ -31,23 +46,27 @@ const cartSlice = createSlice({
         state.cartItems = [...state.cartItems, item];
       }
 
-      return updateCart(state, action.meta?.userId);
+      return updateCart(state, userId);
     },
     removeFromCart: (state, action) => {
-      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
-      return updateCart(state, action.meta?.userId);
+      const { productId, userId } = action.payload;
+      state.cartItems = state.cartItems.filter((x) => x._id !== productId);
+      return updateCart(state, userId);
     },
     saveShippingAddress: (state, action) => {
-      state.shippingAddress = action.payload;
-      return updateCart(state, action.meta?.userId);
+      const { shippingData, userId } = action.payload;
+      state.shippingAddress = shippingData;
+      return updateCart(state, userId);
     },
     savePaymentMethod: (state, action) => {
-      state.paymentMethod = action.payload;
-      return updateCart(state, action.meta?.userId);
+      const { paymentMethod, userId } = action.payload;
+      state.paymentMethod = paymentMethod;
+      return updateCart(state, userId);
     },
     clearCartItems: (state, action) => {
+      const { userId } = action.payload;
       state.cartItems = [];
-      return updateCart(state, action.meta?.userId);
+      return updateCart(state, userId);
     },
     loadUserCart: (state, action) => {
       const userId = action.payload;
@@ -55,7 +74,8 @@ const cartSlice = createSlice({
       state.cartItems = userCartState.cartItems;
       state.shippingAddress = userCartState.shippingAddress;
       state.paymentMethod = userCartState.paymentMethod;
-      return state;
+      // Calculate prices for the loaded cart
+      return updateCart(state, userId);
     },
     clearUserCart: (state, action) => {
       const userId = action.payload;

@@ -45,7 +45,10 @@ const ProductScreen = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const addToCartHandler = () => {
-    dispatch(addToCart({ ...product, qty }, { meta: { userId: userInfo?._id } }));
+    dispatch(addToCart({ 
+      item: { ...product, qty }, 
+      userId: userInfo?._id 
+    }));
     toast.success('Item added to cart');
   };
 
