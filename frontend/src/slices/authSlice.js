@@ -17,6 +17,8 @@ const authSlice = createSlice({
     logout: (state, action) => {
       state.userInfo = null;
       localStorage.removeItem('userInfo');
+      // Clear guest cart when logging out
+      localStorage.removeItem('cart_guest');
     },
   },
 });

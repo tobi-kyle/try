@@ -10,6 +10,7 @@ import Meta from '../components/Meta';
 const ShippingScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
+  const { userInfo } = useSelector((state) => state.auth);
 
   const [address, setAddress] = useState(shippingAddress?.address || '');
   const [city, setCity] = useState(shippingAddress?.city || '');
@@ -23,13 +24,13 @@ const ShippingScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({ address, city, postalCode, country }));
+    dispatch(saveShippingAddress({ address, city, postalCode, country }, { meta: { userId: userInfo?._id } }));
     navigate('/payment');
   };
 
   return (
     <FormContainer>
-      <Meta title={'TechShop'} />
+      <Meta title={'Z.US'} />
       <CheckoutSteps step1 step2 />
       <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>

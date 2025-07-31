@@ -15,6 +15,7 @@ const PaymentScreen = () => {
 
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
+  const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!shippingAddress) {
@@ -24,13 +25,13 @@ const PaymentScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePaymentMethod(paymentMethod));
+    dispatch(savePaymentMethod(paymentMethod, { meta: { userId: userInfo?._id } }));
     navigate('/placeorder');
   };
 
   return (
     <FormContainer>
-      <Meta title={'TechShop'} />
+      <Meta title={'Z.US'} />
       <CheckoutSteps step1 step2 step3 />
       <h1>Payment Method</h1>
       <Form onSubmit={submitHandler}>

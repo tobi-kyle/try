@@ -7,6 +7,7 @@ import { Navbar, Nav, Container, Badge, NavDropdown } from 'react-bootstrap';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
 import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
+import { clearUserCart } from '../slices/cartSlice';
 import SearchBox from './SearchBox';
 import logo from '../assets/zeusLogo.png';
 import '../assets/styles/header.css';
@@ -23,6 +24,10 @@ const Header = () => {
   const logoutHandler = async () => {
     try {
       await logoutApiCall().unwrap();
+      // Clear user-specific cart before logging out
+      if (userInfo?._id) {
+        dispatch(clearUserCart(userInfo._id));
+      }
       dispatch(logout());
       navigate('/login');
     } catch (error) {

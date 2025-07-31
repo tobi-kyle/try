@@ -35,6 +35,13 @@ const ProfileScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!name.trim() || !email.trim()) {
+      toast.error('Name and email are required');
+      return;
+    }
+    
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
     } else {
@@ -55,7 +62,7 @@ const ProfileScreen = () => {
 
   return (
     <Row>
-      <Meta title={'TechShop'} />
+      <Meta title={'Z.US'} />
       <Col md={3}>
         <h2>User Profile</h2>
         <Form onSubmit={submitHandler}>
