@@ -24,7 +24,10 @@ const ShippingScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({ address, city, postalCode, country }, { meta: { userId: userInfo?._id } }));
+    dispatch(saveShippingAddress({ 
+      shippingAddress: { address, city, postalCode, country }, 
+      userId: userInfo?._id 
+    }));
     navigate('/payment');
   };
 

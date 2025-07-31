@@ -19,7 +19,7 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const item = action.payload;
+      const { userId, ...item } = action.payload;
 
       const existItem = state.cartItems.find((x) => x._id === item._id);
 
@@ -31,23 +31,27 @@ const cartSlice = createSlice({
         state.cartItems = [...state.cartItems, item];
       }
 
-      return updateCart(state, action.meta?.userId);
+      return updateCart(state, userId);
     },
     removeFromCart: (state, action) => {
-      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
-      return updateCart(state, action.meta?.userId);
+      const { productId, userId } = action.payload;
+      state.cartItems = state.cartItems.filter((x) => x._id !== productId);
+      return updateCart(state, userId);
     },
     saveShippingAddress: (state, action) => {
-      state.shippingAddress = action.payload;
-      return updateCart(state, action.meta?.userId);
+      const { shippingAddress, userId } = action.payload;
+      state.shippingAddress = shippingAddress;
+      return updateCart(state, userId);
     },
     savePaymentMethod: (state, action) => {
-      state.paymentMethod = action.payload;
-      return updateCart(state, action.meta?.userId);
+      const { paymentMethod, userId } = action.payload;
+      state.paymentMethod = paymentMethod;
+      return updateCart(state, userId);
     },
     clearCartItems: (state, action) => {
+      const userId = action.payload;
       state.cartItems = [];
-      return updateCart(state, action.meta?.userId);
+      return updateCart(state, userId);
     },
     loadUserCart: (state, action) => {
       const userId = action.payload;

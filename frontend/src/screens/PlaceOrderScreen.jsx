@@ -40,7 +40,7 @@ const PlaceOrderScreen = () => {
     }).unwrap();
 
     console.log('✅ Order Response:', res);
-    dispatch(clearCartItems({ meta: { userId: userInfo?._id } }));
+    dispatch(clearCartItems(userInfo?._id));
     navigate(`/order/${res._id}`);
   } catch (err) {
     console.error('❌ Order creation failed:', err);

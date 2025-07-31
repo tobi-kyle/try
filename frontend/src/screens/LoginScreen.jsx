@@ -6,7 +6,7 @@ import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import { useLoginMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
-import { loadUserCart } from '../slices/cartSlice';
+import { loadUserCart, clearCartItems } from '../slices/cartSlice';
 import { toast } from 'react-toastify';
 import Meta from '../components/Meta';
 
@@ -35,6 +35,10 @@ const LoginScreen = () => {
     e.preventDefault();
     try {
       const res = await login({ email, password }).unwrap();
+      
+      // Clear any existing cart items before loading new user's cart
+      dispatch(clearCartItems(null));
+      
       dispatch(setCredentials({ ...res }));
       // Load user-specific cart after successful login
       dispatch(loadUserCart(res._id));
