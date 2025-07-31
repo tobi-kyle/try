@@ -14,6 +14,7 @@ const PlaceOrderScreen = () => {
   const navigate = useNavigate();
 
   const cart = useSelector((state) => state.cart);
+  const { userInfo } = useSelector((state) => state.auth);
 
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
@@ -39,7 +40,7 @@ const PlaceOrderScreen = () => {
     }).unwrap();
 
     console.log('✅ Order Response:', res);
-    dispatch(clearCartItems());
+    dispatch(clearCartItems({ meta: { userId: userInfo?._id } }));
     navigate(`/order/${res._id}`);
   } catch (err) {
     console.error('❌ Order creation failed:', err);

@@ -15,6 +15,7 @@ const PaymentScreen = () => {
 
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
+  const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (!shippingAddress) {
@@ -24,7 +25,7 @@ const PaymentScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePaymentMethod(paymentMethod));
+    dispatch(savePaymentMethod(paymentMethod, { meta: { userId: userInfo?._id } }));
     navigate('/placeorder');
   };
 

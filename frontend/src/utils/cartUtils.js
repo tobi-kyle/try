@@ -2,7 +2,10 @@ export const addDecimals = (num) => {
   return (Math.round(num * 100) / 100).toFixed(2);
 };
 
-export const updateCart = (state) => {
+// Helper function to get user-specific cart key
+const getCartKey = (userId) => userId ? `cart_${userId}` : 'cart_guest';
+
+export const updateCart = (state, userId) => {
   // Calculate items price
   state.itemsPrice = addDecimals(
     state.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0),
@@ -21,7 +24,9 @@ export const updateCart = (state) => {
     Number(state.taxPrice)
   ).toFixed(2);
 
-  localStorage.setItem('cart', JSON.stringify(state));
+  // Store cart with user-specific key
+  const cartKey = getCartKey(userId);
+  localStorage.setItem(cartKey, JSON.stringify(state));
 
   return state;
 };

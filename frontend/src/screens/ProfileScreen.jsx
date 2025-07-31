@@ -35,6 +35,13 @@ const ProfileScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!name.trim() || !email.trim()) {
+      toast.error('Name and email are required');
+      return;
+    }
+    
     if (password !== confirmPassword) {
       toast.error('Passwords do not match');
     } else {

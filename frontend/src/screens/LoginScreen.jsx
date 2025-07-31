@@ -6,6 +6,7 @@ import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import { useLoginMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
+import { loadUserCart } from '../slices/cartSlice';
 import { toast } from 'react-toastify';
 import Meta from '../components/Meta';
 
@@ -13,8 +14,8 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [login, { isLoading }] = useLoginMutation();
 
@@ -35,6 +36,8 @@ const LoginScreen = () => {
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
+      // Load user-specific cart after successful login
+      dispatch(loadUserCart(res._id));
       navigate(redirect);
     } catch (error) {
       toast.error(error?.data?.message || error.error);

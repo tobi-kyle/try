@@ -21,13 +21,14 @@ const CartScreen = () => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const { userInfo } = useSelector((state) => state.auth);
 
   const addToCartHandler = async (product, qty) => {
-    dispatch(addToCart({ ...product, qty }));
+    dispatch(addToCart({ ...product, qty }, { meta: { userId: userInfo?._id } }));
   };
 
   const removeFromCartHandler = async (id) => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(id, { meta: { userId: userInfo?._id } }));
   };
 
   const checkoutHandler = () => {
