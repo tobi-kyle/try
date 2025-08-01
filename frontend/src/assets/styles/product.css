@@ -17,3 +17,17 @@
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
 }
+
+/* Carousel Arrow Styles */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: white !important;
+  border-radius: 50% !important;
+  padding: 10px !important;
+  opacity: 0.8 !important;
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  opacity: 1 !important;
+}

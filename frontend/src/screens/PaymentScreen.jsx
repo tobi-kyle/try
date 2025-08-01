@@ -25,7 +25,10 @@ const PaymentScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(savePaymentMethod(paymentMethod, { meta: { userId: userInfo?._id } }));
+    dispatch(savePaymentMethod({ 
+      paymentMethod, 
+      userId: userInfo?._id 
+    }));
     navigate('/placeorder');
   };
 

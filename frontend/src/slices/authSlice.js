@@ -15,10 +15,17 @@ const authSlice = createSlice({
       localStorage.setItem('userInfo', JSON.stringify(action.payload));
     },
     logout: (state, action) => {
+      // Store the current user ID before clearing userInfo
+      const currentUserId = state.userInfo?._id;
+      
       state.userInfo = null;
       localStorage.removeItem('userInfo');
+      
       // Clear guest cart when logging out
       localStorage.removeItem('cart_guest');
+      
+      // Return the userId so the component can clear the user's cart
+      return { ...state, loggedOutUserId: currentUserId };
     },
   },
 });
